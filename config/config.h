@@ -14,3 +14,9 @@
 #define CONFIG_ARM_MMU
 #define CONFIG_CPU_HAS_MPU          1
 #define CONFIG_ARM_MPU
+
+// MISC
+#define CONFIG_SPIN_VALIDATE
+#define CONFIG_SMP
+#define CONFIG_ASSERT
+#define CONFIG_ASSERT_LEVEL 1

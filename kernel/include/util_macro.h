@@ -87,6 +87,9 @@ extern "C" {
  */
 #define IS_BIT_MASK(m) IS_SHIFTED_BIT_MASK(m, 0)
 
+/* macros convert value of its argument to a string */
+#define DO_TOSTR(s) #s
+#define TOSTR(s) DO_TOSTR(s)
 
 #ifdef __cplusplus
 }

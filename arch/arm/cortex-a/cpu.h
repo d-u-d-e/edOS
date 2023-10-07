@@ -1,5 +1,7 @@
 #pragma once
 
+#include <kernel/include/toolchain/toolchain.h>
+
 #define MODE_USR	0x10
 #define MODE_FIQ	0x11
 #define MODE_IRQ	0x12
