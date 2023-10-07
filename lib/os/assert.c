@@ -14,6 +14,6 @@ void assert_print(const char *fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
-	//vprintk(fmt, ap); TODO
+	vprintk(fmt, ap);
 	va_end(ap);
 }

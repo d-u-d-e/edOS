@@ -6,3 +6,5 @@
 #include <kernel/include/util_macro.h>
 #include <kernel/include/atomic.h>
 #include <kernel/include/fatal.h>
+#include <kernel/include/sys/printk.h>
+#include <kernel/include/spinlock.h>

@@ -70,6 +70,7 @@ add_executable(edOS
     kernel/source/fatal.c
 
     lib/os/assert.c
+    lib/os/printk.c
 )
 
 target_link_libraries(edOS c)
