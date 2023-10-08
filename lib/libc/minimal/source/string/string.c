@@ -11,3 +11,15 @@ size_t strnlen(const char *s, size_t maxlen) {
 
   return n;
 }
+
+size_t strlen(const char *s)
+{
+	size_t n = 0;
+
+	while (*s != '\0') {
+		s++;
+		n++;
+	}
+
+	return n;
+}

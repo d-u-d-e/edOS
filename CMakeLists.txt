@@ -55,7 +55,7 @@ set(INCLUDES ${PROJECT_SOURCE_DIR}
 include_directories(${INCLUDES})
 
 add_library(c 
-    lib/libc/minimal/string/strlen.c
+    lib/libc/minimal/source/string/string.c
 )
 
 target_compile_options(c PUBLIC
@@ -69,8 +69,11 @@ add_executable(edOS
     kernel/source/idle.c
     kernel/source/fatal.c
 
+    lib/os/cbprintf_nano.c
     lib/os/assert.c
     lib/os/printk.c
+
+    syscalls/sys_uart.c
 )
 
 target_link_libraries(edOS c)
