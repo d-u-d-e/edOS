@@ -91,6 +91,14 @@ extern "C" {
 #define DO_TOSTR(s) #s
 #define TOSTR(s) DO_TOSTR(s)
 
+#define COND_CODE_1(_flag, _if_1_code, _else_code) \
+	Z_COND_CODE_1(_flag, _if_1_code, _else_code)
+
+
+/** @brief 0 if @p cond is true-ish; causes a compile error otherwise. */
+#define ZERO_OR_COMPILE_ERROR(cond) ((int) sizeof(char[1 - 2 * !(cond)]) - 1)
+
+
 #ifdef __cplusplus
 }
 #endif
