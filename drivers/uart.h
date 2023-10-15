@@ -1,17 +1,16 @@
 #pragma once
 
-#include <stddef.h>
-#include <kernel/include/toolchain/toolchain.h>
-#include <kernel/include/device.h>
+#include <os/include/device.h>
+#include <os/include/toolchain/toolchain.h>
 #include <lib/libc/minimal/include/errno.h>
-
+#include <stddef.h>
 
 __subsystem struct uart_driver_api {
 
-	/** Console I/O function */
-	int (*poll_in)(const struct device *dev, unsigned char *p_char);
-	void (*poll_out)(const struct device *dev, unsigned char out_char);
-	int (*err_check)(const struct device *dev);
+  /** Console I/O function */
+  int (*poll_in)(const struct device *dev, unsigned char *p_char);
+  void (*poll_out)(const struct device *dev, unsigned char out_char);
+  int (*err_check)(const struct device *dev);
 };
 
 /**
@@ -25,16 +24,14 @@ __subsystem struct uart_driver_api {
  */
 __syscall int uart_err_check(const struct device *dev);
 
-static inline int z_impl_uart_err_check(const struct device *dev)
-{
-	const struct uart_driver_api *api =
-		(const struct uart_driver_api *)dev->api;
+static inline int z_impl_uart_err_check(const struct device *dev) {
+  const struct uart_driver_api *api = (const struct uart_driver_api *)dev->api;
 
-	if (api->err_check == NULL) {
-		return -ENOSYS;
-	}
+  if (api->err_check == NULL) {
+    return -ENOSYS;
+  }
 
-	return api->err_check(dev);
+  return api->err_check(dev);
 }
 
 /**
@@ -58,15 +55,13 @@ static inline int z_impl_uart_err_check(const struct device *dev)
 __syscall int uart_poll_in(const struct device *dev, unsigned char *p_char);
 
 static inline int z_impl_uart_poll_in(const struct device *dev,
-				      unsigned char *p_char)
-{
-	const struct uart_driver_api *api =
-		(const struct uart_driver_api *)dev->api;
+                                      unsigned char *p_char) {
+  const struct uart_driver_api *api = (const struct uart_driver_api *)dev->api;
 
-	if (api->poll_in == NULL) {
-		return -ENOSYS;
-	}
-	return api->poll_in(dev, p_char);
+  if (api->poll_in == NULL) {
+    return -ENOSYS;
+  }
+  return api->poll_in(dev, p_char);
 }
 
 /**
@@ -83,14 +78,11 @@ static inline int z_impl_uart_poll_in(const struct device *dev,
  * @param dev UART device instance.
  * @param out_char Character to send.
  */
-__syscall void uart_poll_out(const struct device *dev,
-			     unsigned char out_char);
+__syscall void uart_poll_out(const struct device *dev, unsigned char out_char);
 
 static inline void z_impl_uart_poll_out(const struct device *dev,
-					unsigned char out_char)
-{
-	const struct uart_driver_api *api =
-		(const struct uart_driver_api *)dev->api;
+                                        unsigned char out_char) {
+  const struct uart_driver_api *api = (const struct uart_driver_api *)dev->api;
 
-	api->poll_out(dev, out_char);
+  api->poll_out(dev, out_char);
 }

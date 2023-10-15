@@ -1,6 +1,6 @@
-#include "kernel/include/toolchain/gcc.h"
-#include <kernel/include/kernel.h>
-#include <kernel/include/sys/cbprintf.h>
+#include <os/include/toolchain/gcc.h>
+#include <os/include/kernel.h>
+#include <os/include/sys/cbprintf.h>
 
 #if defined(CONFIG_PRINTK_SYNC)
 static struct k_spinlock lock;

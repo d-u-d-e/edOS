@@ -1,4 +1,4 @@
-#include <kernel/include/kernel.h>
+#include <os/include/kernel.h>
 #include <stdarg.h>
 
 #ifdef CONFIG_ASSERT_NO_FILE_INFO

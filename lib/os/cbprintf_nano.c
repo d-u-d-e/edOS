@@ -1,8 +1,8 @@
-#include <kernel/include/sys/cbprintf.h>
+#include <os/include/sys/cbprintf.h>
 #include <stdarg.h>
-#include <kernel/include/types.h>
-#include <kernel/include/util_macro.h>
-#include <kernel/include/toolchain/toolchain.h>
+#include <os/include/types.h>
+#include <os/include/util_macro.h>
+#include <os/include/toolchain/toolchain.h>
 #include <lib/libc/minimal/include/string.h>
 
 #define OUTC(_c) do { \

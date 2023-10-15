@@ -1,6 +1,6 @@
 #include <stdint.h>
-#include <kernel/include/device.h>
-#include <kernel/include/toolchain/toolchain.h>
+#include <os/include/device.h>
+#include <os/include/toolchain/toolchain.h>
 
 //TODO: in Zephyr these are auto-generated
 

@@ -4,8 +4,8 @@
 
 #ifndef _ASMLANGUAGE
 
-#include <kernel/include/types.h>
-#include <kernel/include/util_macro.h>
+#include <os/include/types.h>
+#include <os/include/util_macro.h>
 
 #if defined(CONFIG_CPU_AARCH32_CORTEX_A)
 #include <arch/arm/cortex-a/cpu.h>

@@ -3,7 +3,7 @@
 #ifdef _ASMLANGUAGE
 GTEXT(z_arm_exc_exit);
 #else
-#include <kernel/include/types.h>
+#include <os/include/types.h>
 
 /* ARM GPRs are often designated by two different names */
 #define sys_define_gpr_with_alias(name1, name2) union { uint32_t name1, name2; }

@@ -66,8 +66,8 @@ target_link_libraries(c libgcc.a)
 add_executable(edOS
     arch/arm/cortex-a/reset.S
 
-    kernel/source/idle.c
-    kernel/source/fatal.c
+    os/source/idle.c
+    os/source/fatal.c
 
     lib/os/cbprintf_nano.c
     lib/os/assert.c
