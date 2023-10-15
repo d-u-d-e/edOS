@@ -286,6 +286,11 @@ static inline size_t sys_dlist_len(sys_dlist_t *list)
 	     __cn != NULL; __cn = __cns,				\
 	     __cns = SYS_DLIST_PEEK_NEXT_CONTAINER(__dl, __cn, __n))
 
+/**
+ * @brief Static initializer for a doubly-linked list
+ */
+#define SYS_DLIST_STATIC_INIT(ptr_to_list) { {(ptr_to_list)}, {(ptr_to_list)} }
+
 #ifdef __cplusplus
 }
 #endif

@@ -2,6 +2,9 @@
 
 #include <os/include/sys/dlist.h>
 #include <os/include/types.h>
+#include <os/include/kernel/sched_priq.h>
+#include <arch/structs.h>
+#include <os/include/atomic.h>
 
 /* kernel timeout record */
 
@@ -62,3 +65,60 @@ typedef struct {
 
 /* Thread is present in the ready queue */
 #define _THREAD_QUEUED (BIT(7))
+
+struct _ready_q {
+	/* always contains next thread to run: cannot be NULL */
+	struct k_thread *cache;
+#if defined(CONFIG_SCHED_DUMB)
+	sys_dlist_t runq;
+#elif defined(CONFIG_SCHED_MULTIQ)
+	struct _priq_mq runq;
+#endif
+};
+
+typedef struct _ready_q _ready_q_t;
+
+struct _cpu {
+
+	/* nested interrupt count */
+	uint32_t nested;
+
+	/* currently scheduled thread */
+	struct k_thread *current;
+
+	/* one assigned idle thread per CPU */
+	struct k_thread *idle_thread;
+
+	uint8_t id;
+
+#if defined(CONFIG_FPU_SHARING)
+	void *fp_ctx;
+#endif
+
+	/* Per CPU architecture specifics */
+	struct _cpu_arch arch;
+};
+
+struct z_kernel {
+	struct _cpu cpus[CONFIG_MP_MAX_NUM_CPUS];
+
+#ifdef CONFIG_PM
+	int32_t idle; /* Number of ticks for kernel idling */
+#endif
+
+	struct _ready_q ready_q;
+
+#ifdef CONFIG_FPU_SHARING
+	/* thread that owns the FP regs */
+	struct k_thread *current_fp;
+#endif
+
+};
+
+typedef struct z_kernel _kernel_t;
+
+extern struct z_kernel _kernel;
+extern atomic_t _cpus_active;
+
+#define _current_cpu (&_kernel.cpus[0])
+#define _current _kernel.cpus[0].current

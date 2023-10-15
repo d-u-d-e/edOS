@@ -54,3 +54,19 @@ void __printf_like(1, 2) assert_print(const char *fmt, ...);
  */
 #define k_panic()	z_except_reason(K_ERR_KERNEL_PANIC)
 
+#if CONFIG_NUM_COOP_PRIORITIES + CONFIG_NUM_PREEMPT_PRIORITIES == 0
+#error Zero available thread priorities defined!
+#endif
+
+#define K_PRIO_COOP(x) (-(CONFIG_NUM_COOP_PRIORITIES - (x)))
+#define K_PRIO_PREEMPT(x) (x)
+
+#define K_HIGHEST_THREAD_PRIO (-CONFIG_NUM_COOP_PRIORITIES)
+#define K_LOWEST_THREAD_PRIO CONFIG_NUM_PREEMPT_PRIORITIES
+#define K_IDLE_PRIO K_LOWEST_THREAD_PRIO
+#define K_HIGHEST_APPLICATION_THREAD_PRIO (K_HIGHEST_THREAD_PRIO)
+#define K_LOWEST_APPLICATION_THREAD_PRIO (K_LOWEST_THREAD_PRIO - 1)
+
+#ifdef CONFIG_MULTITHREADING
+extern struct k_thread z_idle_threads[CONFIG_MP_MAX_NUM_CPUS];
+#endif
